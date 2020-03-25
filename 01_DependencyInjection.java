@@ -1,5 +1,4 @@
-/*
-// Maven Project File Structure
+# Maven Project File Structure
 springTest
   src/main/java
     ems.member
@@ -28,8 +27,6 @@ springTest
     appCtxImport.xml
     applicationContext.xml
   pom.xml
-
-*/
 
 /*
 // pom.xml
