@@ -193,7 +193,7 @@ public class MainClass {
 /*
 // MainClassUseXML.java
 
-package ems.member.main;
+package ems.member;
 
 import java.util.Scanner;
 
