@@ -200,7 +200,7 @@ import java.util.Scanner;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import ems.member.Student;
-//import ems.member.assembler.StudentAssembler;
+//import ems.member.StudentAssembler;
 import ems.member.service.EMSInformationService;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentDeleteService;
@@ -308,14 +308,14 @@ public class MainClassUseXML {
 /*
 // MainClassUseXMLs.java
 
-package ems.member.main;
+package ems.member;
 
 import java.util.Scanner;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import ems.member.Student;
-//import ems.member.assembler.StudentAssembler;
+//import ems.member.StudentAssembler;
 import ems.member.service.EMSInformationService;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentDeleteService;
@@ -424,14 +424,14 @@ public class MainClassUseXMLs {
 /*
 // MainClassUseXMLsImport.java
 
-package ems.member.main;
+package ems.member;
 
 import java.util.Scanner;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import ems.member.Student;
-//import ems.member.assembler.StudentAssembler;
+//import ems.member.StudentAssembler;
 import ems.member.service.EMSInformationService;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentDeleteService;
@@ -625,7 +625,7 @@ public class Student {
 /*
 // StudentAssembler.java
 
-package ems.member.assembler;
+package ems.member;
 
 import ems.member.dao.StudentDao;
 import ems.member.service.StudentAllSelectService;
