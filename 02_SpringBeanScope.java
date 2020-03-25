@@ -1,6 +1,4 @@
-/*
-// Maven Project File Structure
-
+# Maven Project File Structure
 springTest
   src/main/java
     scope
@@ -10,8 +8,6 @@ springTest
   src/main/resources
     applicationContext.xml
   pom.xml
-
-*/
 
 /*
 // pom.xml
