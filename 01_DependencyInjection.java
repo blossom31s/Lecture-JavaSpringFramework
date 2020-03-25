@@ -172,21 +172,349 @@ public class MainClass {
 /*
 // MainClassUseConfiguration.java
 
+package ems.member;
 
+import java.util.Scanner;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+//import org.springframework.context.support.GenericXmlApplicationContext;
+
+import ems.member.configuration.MemberConfig;
+//import ems.member.Student;
+//import ems.member.StudentAssembler;
+import ems.member.service.EMSInformationService;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+public class MainClassUseConfiguration {
+
+	public static void main(String[] args) {
+
+		String[] sNums = {"H39r8djakndfae32", "H39asdfaelu42o23", "H39iiemamca8w9h4", 
+						  "H39lkmn754fghia7", "H39plo865cuy8k92", "H39mnbviiaed89q1", 
+						  "H399omjjyv56t3d5", "H39lczaqwg644gj8", "H39ymbcsh74thgh2", 
+						  "H39lesvj7544vf89"};
+
+		String[] sIds = {"rabbit", "hippo", "raccoon", "elephant", "lion", 
+						  "tiger", "pig", "horse", "bird", "deer"};
+
+		String[] sPws = {"96539", "94875", "15284", "48765", "28661", 
+						 "60915", "30028", "29801", "28645", "28465"};
+
+		String[] sNames = {"agatha", "barbara", "chris", "doris", "elva", 
+						   "fiona", "holly", "jasmin", "lena", "melissa"};
+
+		int[] sAges = {19, 22, 20, 27, 19, 21, 19, 25, 22, 24};
+
+		String[] sGenders = {"M", "W", "W", "M", "M", "M", "W", "M", "W", "W"};
+
+		String[] sMajors = {"English Literature", "Korean Language and Literature", 
+							"French Language and Literature", "Philosophy", "History", 
+							"Law", "Statistics", "Computer", "Economics", "Public Administration"};
+
+		Scanner scanner = new Scanner(System.in);
+//		GenericXmlApplicationContext ctx =
+//		new GenericXmlApplicationContext("classpath:applicationContext.xml");
+//		StudentAssembler assembler = new StudentAssembler();
+//		StudentRegisterService registerService = assembler.getRegisterService();
+//		StudentModifyService modifyService = assembler.getModifyService();
+//		StudentDeleteService deleteService = assembler.getDeleteService();
+//		StudentSelectService selectService = assembler.getSelectService();
+//		StudentAllSelectService allSelectService = assembler.getAllSelectService();
+		AnnotationConfigApplicationContext ctx =
+				new AnnotationConfigApplicationContext(MemberConfig.class);
+		EMSInformationService informationService = ctx.getBean("informationService", EMSInformationService.class);
+		StudentRegisterService registerService = ctx.getBean("registerService", StudentRegisterService.class);
+		StudentModifyService modifyService = ctx.getBean("modifyService", StudentModifyService.class);
+		StudentDeleteService deleteService = ctx.getBean("deleteService", StudentDeleteService.class);
+		StudentSelectService selectService = ctx.getBean("selectService", StudentSelectService.class);
+		StudentAllSelectService allSelectService = ctx.getBean("allSelectService", StudentAllSelectService.class);
+
+		// information
+		informationService.outputEMSInformation();
+		
+		// register
+		for(int i=0 ; i<sNums.length ; ++i) {
+			Student student = new Student(sNums[i], sIds[i], sPws[i], sNames[i],
+					sAges[i], sGenders[i], sMajors[i]);
+			registerService.register(student);
+		}
+
+		// modify
+		modifyService.modify(new Student("H39lesvj7544vf89", "deer", "12345", "melissa", 
+				26, "W", "Vocal Music"));
+
+		// delete
+		deleteService.delete("H399omjjyv56t3d5");
+
+		// select
+		selectService.select("H39r8djakndfae32");
+
+		// allSelect
+		allSelectService.allSelect();
+
+		// user menu
+		while(true) {
+			String str = "";
+			System.out.println("--------------------------------------------------"
+					+ "--------------------------------------------------"
+					+ "--------------------------------------------------");
+			System.out.println("Select Number.");
+			System.out.println("1. Check Student Information");
+			System.out.println("2. Exit");
+
+			str = scanner.next();
+			if(str.equals("2")) {
+				System.out.println("Bye~!");
+				break;
+			} else {
+				System.out.println("Please input your class number.");
+				str = scanner.next();
+				selectService.select(str);
+			}
+		}
+
+		ctx.close();
+		scanner.close();
+	}
+}
 
 */
 
 /*
 // MainClassUseConfigurations.java
 
+package ems.member;
 
+import java.util.Scanner;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+//import org.springframework.context.support.GenericXmlApplicationContext;
+
+//import ems.member.configuration.MemberConfig;
+import ems.member.configuration.MemberConfig1;
+import ems.member.configuration.MemberConfig2;
+import ems.member.configuration.MemberConfig3;
+//import ems.member.Student;
+//import ems.member.StudentAssembler;
+import ems.member.service.EMSInformationService;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+public class MainClassUseConfigurations {
+
+	public static void main(String[] args) {
+
+		String[] sNums = {"H39r8djakndfae32", "H39asdfaelu42o23", "H39iiemamca8w9h4", 
+						  "H39lkmn754fghia7", "H39plo865cuy8k92", "H39mnbviiaed89q1", 
+						  "H399omjjyv56t3d5", "H39lczaqwg644gj8", "H39ymbcsh74thgh2", 
+						  "H39lesvj7544vf89"};
+
+		String[] sIds = {"rabbit", "hippo", "raccoon", "elephant", "lion", 
+						  "tiger", "pig", "horse", "bird", "deer"};
+
+		String[] sPws = {"96539", "94875", "15284", "48765", "28661", 
+						 "60915", "30028", "29801", "28645", "28465"};
+
+		String[] sNames = {"agatha", "barbara", "chris", "doris", "elva", 
+						   "fiona", "holly", "jasmin", "lena", "melissa"};
+
+		int[] sAges = {19, 22, 20, 27, 19, 21, 19, 25, 22, 24};
+
+		String[] sGenders = {"M", "W", "W", "M", "M", "M", "W", "M", "W", "W"};
+
+		String[] sMajors = {"English Literature", "Korean Language and Literature", 
+							"French Language and Literature", "Philosophy", "History", 
+							"Law", "Statistics", "Computer", "Economics", "Public Administration"};
+
+		Scanner scanner = new Scanner(System.in);
+//		GenericXmlApplicationContext ctx =
+//		new GenericXmlApplicationContext("classpath:applicationContext.xml");
+//		StudentAssembler assembler = new StudentAssembler();
+//		StudentRegisterService registerService = assembler.getRegisterService();
+//		StudentModifyService modifyService = assembler.getModifyService();
+//		StudentDeleteService deleteService = assembler.getDeleteService();
+//		StudentSelectService selectService = assembler.getSelectService();
+//		StudentAllSelectService allSelectService = assembler.getAllSelectService();
+		AnnotationConfigApplicationContext ctx =
+				new AnnotationConfigApplicationContext(MemberConfig1.class, MemberConfig2.class, MemberConfig3.class);
+		EMSInformationService informationService = ctx.getBean("informationService", EMSInformationService.class);
+		StudentRegisterService registerService = ctx.getBean("registerService", StudentRegisterService.class);
+		StudentModifyService modifyService = ctx.getBean("modifyService", StudentModifyService.class);
+		StudentDeleteService deleteService = ctx.getBean("deleteService", StudentDeleteService.class);
+		StudentSelectService selectService = ctx.getBean("selectService", StudentSelectService.class);
+		StudentAllSelectService allSelectService = ctx.getBean("allSelectService", StudentAllSelectService.class);
+
+		// information
+		informationService.outputEMSInformation();
+		
+		// register
+		for(int i=0 ; i<sNums.length ; ++i) {
+			Student student = new Student(sNums[i], sIds[i], sPws[i], sNames[i],
+					sAges[i], sGenders[i], sMajors[i]);
+			registerService.register(student);
+		}
+
+		// modify
+		modifyService.modify(new Student("H39lesvj7544vf89", "deer", "12345", "melissa", 
+				26, "W", "Vocal Music"));
+
+		// delete
+		deleteService.delete("H399omjjyv56t3d5");
+
+		// select
+		selectService.select("H39r8djakndfae32");
+
+		// allSelect
+		allSelectService.allSelect();
+
+		// user menu
+		while(true) {
+			String str = "";
+			System.out.println("--------------------------------------------------"
+					+ "--------------------------------------------------"
+					+ "--------------------------------------------------");
+			System.out.println("Select Number.");
+			System.out.println("1. Check Student Information");
+			System.out.println("2. Exit");
+
+			str = scanner.next();
+			if(str.equals("2")) {
+				System.out.println("Bye~!");
+				break;
+			} else {
+				System.out.println("Please input your class number.");
+				str = scanner.next();
+				selectService.select(str);
+			}
+		}
+
+		ctx.close();
+		scanner.close();
+	}
+}
 
 */
 
 /*
 // MainClassUseConfigurationsImport.java
 
+package ems.member;
 
+import java.util.Scanner;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+//import org.springframework.context.support.GenericXmlApplicationContext;
+
+//import ems.member.configuration.MemberConfig;
+import ems.member.configuration.MemberConfigImport;
+//import ems.member.Student;
+//import ems.member.StudentAssembler;
+import ems.member.service.EMSInformationService;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+public class MainClassUseConfigurationsImport {
+
+	public static void main(String[] args) {
+
+		String[] sNums = {"H39r8djakndfae32", "H39asdfaelu42o23", "H39iiemamca8w9h4", 
+						  "H39lkmn754fghia7", "H39plo865cuy8k92", "H39mnbviiaed89q1", 
+						  "H399omjjyv56t3d5", "H39lczaqwg644gj8", "H39ymbcsh74thgh2", 
+						  "H39lesvj7544vf89"};
+
+		String[] sIds = {"rabbit", "hippo", "raccoon", "elephant", "lion", 
+						  "tiger", "pig", "horse", "bird", "deer"};
+
+		String[] sPws = {"96539", "94875", "15284", "48765", "28661", 
+						 "60915", "30028", "29801", "28645", "28465"};
+
+		String[] sNames = {"agatha", "barbara", "chris", "doris", "elva", 
+						   "fiona", "holly", "jasmin", "lena", "melissa"};
+
+		int[] sAges = {19, 22, 20, 27, 19, 21, 19, 25, 22, 24};
+
+		String[] sGenders = {"M", "W", "W", "M", "M", "M", "W", "M", "W", "W"};
+
+		String[] sMajors = {"English Literature", "Korean Language and Literature", 
+							"French Language and Literature", "Philosophy", "History", 
+							"Law", "Statistics", "Computer", "Economics", "Public Administration"};
+
+		Scanner scanner = new Scanner(System.in);
+//		GenericXmlApplicationContext ctx =
+//		new GenericXmlApplicationContext("classpath:applicationContext.xml");
+//		StudentAssembler assembler = new StudentAssembler();
+//		StudentRegisterService registerService = assembler.getRegisterService();
+//		StudentModifyService modifyService = assembler.getModifyService();
+//		StudentDeleteService deleteService = assembler.getDeleteService();
+//		StudentSelectService selectService = assembler.getSelectService();
+//		StudentAllSelectService allSelectService = assembler.getAllSelectService();
+		AnnotationConfigApplicationContext ctx =
+				new AnnotationConfigApplicationContext(MemberConfigImport.class);
+		EMSInformationService informationService = ctx.getBean("informationService", EMSInformationService.class);
+		StudentRegisterService registerService = ctx.getBean("registerService", StudentRegisterService.class);
+		StudentModifyService modifyService = ctx.getBean("modifyService", StudentModifyService.class);
+		StudentDeleteService deleteService = ctx.getBean("deleteService", StudentDeleteService.class);
+		StudentSelectService selectService = ctx.getBean("selectService", StudentSelectService.class);
+		StudentAllSelectService allSelectService = ctx.getBean("allSelectService", StudentAllSelectService.class);
+
+		// information
+		informationService.outputEMSInformation();
+		
+		// register
+		for(int i=0 ; i<sNums.length ; ++i) {
+			Student student = new Student(sNums[i], sIds[i], sPws[i], sNames[i],
+					sAges[i], sGenders[i], sMajors[i]);
+			registerService.register(student);
+		}
+
+		// modify
+		modifyService.modify(new Student("H39lesvj7544vf89", "deer", "12345", "melissa", 
+				26, "W", "Vocal Music"));
+
+		// delete
+		deleteService.delete("H399omjjyv56t3d5");
+
+		// select
+		selectService.select("H39r8djakndfae32");
+
+		// allSelect
+		allSelectService.allSelect();
+
+		// user menu
+		while(true) {
+			String str = "";
+			System.out.println("--------------------------------------------------"
+					+ "--------------------------------------------------"
+					+ "--------------------------------------------------");
+			System.out.println("Select Number.");
+			System.out.println("1. Check Student Information");
+			System.out.println("2. Exit");
+
+			str = scanner.next();
+			if(str.equals("2")) {
+				System.out.println("Bye~!");
+				break;
+			} else {
+				System.out.println("Please input your class number.");
+				str = scanner.next();
+				selectService.select(str);
+			}
+		}
+
+		ctx.close();
+		scanner.close();
+	}
+}
 
 */
 
@@ -707,35 +1035,318 @@ public class StudentAssembler {
 /*
 // MemberConfig.java
 
+package ems.member.configuration;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import ems.member.DataBaseConnectionInfo;
+import ems.member.dao.StudentDao;
+import ems.member.service.EMSInformationService;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+@Configuration
+public class MemberConfig {
+
+	@Bean
+	public StudentDao studentDao() {
+		return new StudentDao();
+	}
+
+	@Bean
+	public StudentRegisterService registerService() {
+		return new StudentRegisterService(studentDao());
+	}
+
+	@Bean
+	public StudentModifyService modifyService() {
+		return new StudentModifyService(studentDao());
+	}
+
+	@Bean
+	public StudentDeleteService deleteService() {
+		return new StudentDeleteService(studentDao());
+	}
+
+	@Bean
+	public StudentSelectService selectService() {
+		return new StudentSelectService(studentDao());
+	}
+
+	@Bean
+	public StudentAllSelectService allSelectService() {
+		return new StudentAllSelectService(studentDao());
+	}
+
+	@Bean
+	public DataBaseConnectionInfo dataBaseConnectionInfoDev() {
+		DataBaseConnectionInfo infoDev = new DataBaseConnectionInfo();
+		infoDev.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+		infoDev.setUserId("scott");
+		infoDev.setUserPw("tiger");
+
+		return infoDev;
+	}
+
+	@Bean
+	public DataBaseConnectionInfo dataBaseConnectionInfoReal() {
+		DataBaseConnectionInfo infoReal = new DataBaseConnectionInfo();
+		infoReal.setJdbcUrl("jdbc:oracle:thin:@192.64.0.1:1521:orcl");
+		infoReal.setUserId("masterid");
+		infoReal.setUserPw("masterpw");
+
+		return infoReal;
+	}
+
+	@Bean
+	public EMSInformationService informationService() {
+		EMSInformationService info = new EMSInformationService();
+		info.setInfo("Education Management System program was developed in 2015.");
+		info.setCopyRight("COPYRIGHT(C) 2015 EMS CO., LTD. ALL RIGHT RESERVED. CONTACT MASTER FOR MORE INFORMATION.");
+		info.setVer("The version is 1.0");
+		info.setsYear(2015);
+		info.setsMonth(1);
+		info.setsDay(1);
+		info.seteYear(2015);
+		info.seteMonth(2);
+		info.seteDay(28);
+
+		ArrayList<String> developers = new ArrayList<String>();
+		developers.add("Cheney.");
+		developers.add("Eloy.");
+		developers.add("Jasper.");
+		developers.add("Dillon.");
+		developers.add("Kian.");
+		info.setDevelopers(developers);
+
+		Map<String, String> administrators = new HashMap<String, String>();
+		administrators.put("Cheney", "cheney@springPjt.org");
+		administrators.put("Jasper", "jasper@springPjt.org");
+		info.setAdministrators(administrators);
+
+		Map<String, DataBaseConnectionInfo> dbInfos = new HashMap<String, DataBaseConnectionInfo>();
+		dbInfos.put("dev", dataBaseConnectionInfoDev());
+		dbInfos.put("real", dataBaseConnectionInfoReal());
+		info.setDbInfos(dbInfos);
+
+		return info;
+	}
+
+}
 
 */
 
 /*
 // MemberConfig1.java
 
+package ems.member.configuration;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import ems.member.dao.StudentDao;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+@Configuration
+public class MemberConfig1 {
+
+	@Bean
+	public StudentDao studentDao() {
+		return new StudentDao();
+	}
+
+	@Bean
+	public StudentRegisterService registerService() {
+		return new StudentRegisterService(studentDao());
+	}
+
+	@Bean
+	public StudentModifyService modifyService() {
+		return new StudentModifyService(studentDao());
+	}
+
+	@Bean
+	public StudentDeleteService deleteService() {
+		return new StudentDeleteService(studentDao());
+	}
+
+	@Bean
+	public StudentSelectService selectService() {
+		return new StudentSelectService(studentDao());
+	}
+
+	@Bean
+	public StudentAllSelectService allSelectService() {
+		return new StudentAllSelectService(studentDao());
+	}
+
+}
 
 */
 
 /*
 // MemberConfig2.java
 
+package ems.member.configuration;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import ems.member.DataBaseConnectionInfo;
+
+@Configuration
+public class MemberConfig2 {
+
+	@Bean
+	public DataBaseConnectionInfo dataBaseConnectionInfoDev() {
+		DataBaseConnectionInfo infoDev = new DataBaseConnectionInfo();
+		infoDev.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+		infoDev.setUserId("scott");
+		infoDev.setUserPw("tiger");
+
+		return infoDev;
+	}
+
+	@Bean
+	public DataBaseConnectionInfo dataBaseConnectionInfoReal() {
+		DataBaseConnectionInfo infoReal = new DataBaseConnectionInfo();
+		infoReal.setJdbcUrl("jdbc:oracle:thin:@192.64.0.1:1521:orcl");
+		infoReal.setUserId("masterid");
+		infoReal.setUserPw("masterpw");
+
+		return infoReal;
+	}
+
+}
 
 */
 
 /*
 // MemberConfig3.java
 
+package ems.member.configuration;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import ems.member.DataBaseConnectionInfo;
+import ems.member.service.EMSInformationService;
+
+@Configuration
+public class MemberConfig3 {
+
+	@Autowired
+	DataBaseConnectionInfo dataBaseConnectionInfoDev;
+
+	@Autowired
+	DataBaseConnectionInfo dataBaseConnectionInfoReal;
+
+	@Bean
+	public EMSInformationService informationService() {
+		EMSInformationService info = new EMSInformationService();
+		info.setInfo("Education Management System program was developed in 2015.");
+		info.setCopyRight("COPYRIGHT(C) 2015 EMS CO., LTD. ALL RIGHT RESERVED. CONTACT MASTER FOR MORE INFORMATION.");
+		info.setVer("The version is 1.0");
+		info.setsYear(2015);
+		info.setsMonth(1);
+		info.setsDay(1);
+		info.seteYear(2015);
+		info.seteMonth(2);
+		info.seteDay(28);
+
+		ArrayList<String> developers = new ArrayList<String>();
+		developers.add("Cheney.");
+		developers.add("Eloy.");
+		developers.add("Jasper.");
+		developers.add("Dillon.");
+		developers.add("Kian.");
+		info.setDevelopers(developers);
+
+		Map<String, String> administrators = new HashMap<String, String>();
+		administrators.put("Cheney", "cheney@springPjt.org");
+		administrators.put("Jasper", "jasper@springPjt.org");
+		info.setAdministrators(administrators);
+
+		Map<String, DataBaseConnectionInfo> dbInfos = new HashMap<String, DataBaseConnectionInfo>();
+		dbInfos.put("dev", dataBaseConnectionInfoDev);
+		dbInfos.put("real", dataBaseConnectionInfoReal);
+		info.setDbInfos(dbInfos);
+
+		return info;
+	}
+
+}
 
 */
 
 /*
 // MemberConfigImport.java
 
+package ems.member.configuration;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
+import ems.member.dao.StudentDao;
+import ems.member.service.StudentAllSelectService;
+import ems.member.service.StudentDeleteService;
+import ems.member.service.StudentModifyService;
+import ems.member.service.StudentRegisterService;
+import ems.member.service.StudentSelectService;
+
+@Configuration
+@Import({MemberConfig2.class, MemberConfig3.class})
+public class MemberConfigImport {
+
+	@Bean
+	public StudentDao studentDao() {
+		return new StudentDao();
+	}
+
+	@Bean
+	public StudentRegisterService registerService() {
+		return new StudentRegisterService(studentDao());
+	}
+
+	@Bean
+	public StudentModifyService modifyService() {
+		return new StudentModifyService(studentDao());
+	}
+
+	@Bean
+	public StudentDeleteService deleteService() {
+		return new StudentDeleteService(studentDao());
+	}
+
+	@Bean
+	public StudentSelectService selectService() {
+		return new StudentSelectService(studentDao());
+	}
+
+	@Bean
+	public StudentAllSelectService allSelectService() {
+		return new StudentAllSelectService(studentDao());
+	}
+
+}
 
 */
 
