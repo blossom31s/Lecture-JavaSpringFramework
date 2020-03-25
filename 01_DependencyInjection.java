@@ -72,12 +72,12 @@ public class DataBaseConnectionInfo {
 /*
 // MainClass.java
 
-package ems.member.main;
+package ems.member;
 
 import java.util.Scanner;
 
 import ems.member.Student;
-import ems.member.assembler.StudentAssembler;
+import ems.member.StudentAssembler;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentDeleteService;
 import ems.member.service.StudentModifyService;
