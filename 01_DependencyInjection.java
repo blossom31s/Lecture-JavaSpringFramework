@@ -27,7 +27,7 @@ springTest
     appCtx3.xml
     appCtxImport.xml
     applicationContext.xml
-pom.xml
+  pom.xml
 
 */
 
