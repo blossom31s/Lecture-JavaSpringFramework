@@ -5,6 +5,7 @@
                 HomeController.java
             com.cs.practice.member
                 Member.java
+		MemberLoginInterceptor.java
             com.cs.practice.member.controller
                 MemberController.java
             com.cs.practice.member.dao
@@ -104,6 +105,54 @@ public class Member {
 */
 
 /*
+// MemberLoginInterceptor.java
+
+package com.sc.practice.member;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+public class MemberLoginInterceptor extends HandlerInterceptorAdapter {
+
+	@Override
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler) throws Exception {
+
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			Object obj = session.getAttribute("member");
+			if(obj != null)
+				return true;
+		}
+
+		response.sendRedirect(request.getContextPath() + "/");
+		return false;
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request,
+			HttpServletResponse response, Object handler,
+			ModelAndView mav) throws Exception {
+
+		super.postHandle(request, response, handler, mav);
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request,
+			HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+
+		super.afterCompletion(request, response, handler, ex);
+	}
+}
+
+*/
+
+/*
 // MemberController.java
 
 package com.sc.practice.member.controller;
@@ -157,7 +206,7 @@ public class MemberController {
 
 		service.memberRegister(member);
 
-		return "/member/joinOK";
+		return "/member/joinOk";
 	}
 
 	// Login
@@ -186,7 +235,7 @@ public class MemberController {
 
 		session.setAttribute("member", mem);
 
-		return "/member/loginOK";
+		return "/member/loginOk";
 	}
 
 	// Logout
@@ -206,7 +255,7 @@ public class MemberController {
 
 		session.invalidate();
 
-		return "/member/logoutOK";
+		return "/member/logoutOk";
 	}
 
 	// Modify
@@ -234,7 +283,7 @@ public class MemberController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("memAft", mem);
-		mav.setViewName("/member/modifyOK");
+		mav.setViewName("/member/modifyOk");
 
 		return mav;
 	}
@@ -247,8 +296,13 @@ public class MemberController {
 
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
-		mav.addObject("member", member);
-		mav.setViewName("/member/removeForm");
+
+		if(null == member) {
+			mav.setViewName("redirect:/");
+		} else {
+			mav.addObject("member", member);
+			mav.setViewName("/member/removeForm");
+		}
 
 		return mav;
 	}
@@ -388,6 +442,7 @@ public class MemberService implements IMemberService {
 	@Override
 	public Member memberSearch(Member member) {
 		Member mem = dao.memberSelect(member);
+		printMember(mem);
 
 		return mem;
 	}
